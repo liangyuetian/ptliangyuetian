@@ -4,23 +4,42 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:ptliangyuetian/pages/sidebar/sidebar_page.dart';
-import 'package:ptliangyuetian/router/application.dart';
+import 'package:ptliangyuetian/pages/home/home.page.dart';
+import 'package:ptliangyuetian/pages/setting/setting.page.dart';
 import 'package:ptliangyuetian/router/routers.dart';
 //import 'package:ptliangyuetian/pages/book/sql.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
+  State<StatefulWidget> createState() {
+    return _MainPage();
+  }
+}
+
+class _MainPage extends State {
   final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
   final String bgUrl = 'assets/images/bAvqIeblkajqaqA.jpg';
   final String bgNetworkImage =
       'http://i3.17173cdn.com/2fhnvk/YWxqaGBf/cms3/bAvqIeblkajqaqA.jpg';
+  List<BottomNavigationBarItem> appBottomBar = [];
+  int _currentIndex = 0;
+  List<Widget> _list = List();
+  void initState() {
+    super.initState();
+
+    appBottomBar.add(BottomNavigationBarItem(
+      icon: Icon(Icons.home),
+      title: new Text('home 页')
+    ));
+    appBottomBar.add(BottomNavigationBarItem(
+      icon: Icon(Icons.settings),
+      title: new Text('setting 页')
+    ));
+    _list.add(HomePage());
+    _list.add(SettingPage());
+  }
 
   @override
   Widget build(BuildContext context) {
-//    final model = Provider.of<MainPageModel>(context);
-//    final globalModel = Provider.of<GlobalModel>(context);
-//    final size = MediaQuery.of(context).size;
-//    model.setContext(context,globalModel: globalModel);
-//    globalModel.setMainPageModel(model);
     return Container(
       decoration: BoxDecoration(
         // 设置背景相关
@@ -68,6 +87,14 @@ class MainPage extends StatelessWidget {
         drawer: Drawer(
           child: new SidebarPage(),
         ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: appBottomBar,
+          currentIndex: _currentIndex,
+          //shifting :按钮点击移动效果
+          //fixed：固定
+          type: BottomNavigationBarType.fixed,
+          onTap: appBottomBarTapped,
+        ),
         floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
 //        floatingActionButton: AnimatedFloatingButton(
@@ -75,64 +102,19 @@ class MainPage extends StatelessWidget {
 //              ? model.logic.getCurrentCardColor()
 //              : null,
 //        ),
-        body: Container(
-          width: double.infinity, // 宽度占满
-          height: double.infinity, // 高度占满
-          color: Colors.black12,
-          margin: EdgeInsets.all(20), // 外边距
-            child: new Column(
-//              https://www.jianshu.com/p/1d003ab6c278
-              mainAxisAlignment: MainAxisAlignment.start, // 主轴布局方式:column主轴方向是垂直的方向
-              crossAxisAlignment: CrossAxisAlignment.start, // 交叉轴的布局方式:column来说就是水平方向的布局方式
-              verticalDirection: VerticalDirection.down, // child的垂直布局方向
-              textDirection: TextDirection.ltr, // 文字放向
-              children: <Widget>[
-                new Text('哈哈，这是我最可爱的妹子呢'),
-                new CupertinoButton(
-                    padding: EdgeInsets.all(10), // padding 值
-                    color: Colors.amber,
-                    child: new Text('点击进入图灵社区'),
-                    onPressed: () {
-                      gotoWeb(context);
-                    }),
-                new Container(
-                  margin: EdgeInsets.all(10),
-                  child: new CupertinoButton(
-//                    minSize: 20, // 可以理解为最小宽度
-                      borderRadius: BorderRadius.all(Radius.circular(4.0)), // 圆角 默认8
-                      padding: EdgeInsets.all(10),
-                      disabledColor: Colors.greenAccent,
-                      color: Colors.red,
-                      child: new Text('图灵社区-拥有的书'),
-                      onPressed: () {
-                        gotoWebBook(context);
-                      }),
-                ),
-                new Container(
-                  margin: EdgeInsets.fromLTRB(20, 20, 0, 0),
-                  child: CupertinoButton.filled(child: new Text('具有外边距的按钮'), onPressed: null),
-                )
-                //                new MaterialButton(child: new Text('打开SQL必知必会PDF'), onPressed: () => Navigator.push(
-                //                  context,
-                //                  MaterialPageRoute(builder: (context) => SQLKnow()),
-                //                )),
-              ],
-            )),
+        body: IndexedStack(
+          index: _currentIndex,
+          children: _list,
+        ),
       ),
     );
   }
 
-  gotoWeb(context) {
-    String path = Uri.encodeComponent('https://www.ituring.com.cn/');
-    String title = Uri.encodeComponent('首页-图灵社区');
-    Application.router
-        .navigateTo(context, '${Routes.webViewPage}?title=$title&url=$path');
-  }
 
-  gotoWebBook(context) {
-    String path = Uri.encodeComponent('https://m.ituring.com.cn/user/owe-book');
-    String title = Uri.encodeComponent('拥有的书');
-    Application.router
-        .navigateTo(context, '${Routes.webViewPage}?title=$title&url=$path');
+
+  void appBottomBarTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
   }
 }

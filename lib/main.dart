@@ -6,8 +6,14 @@ import 'package:ptliangyuetian/router/application.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
-  MyApp() {
+class MyApp extends StatefulWidget {
+  State<StatefulWidget> createState() {
+    return _MyApp();
+  }
+}
+
+class _MyApp extends State {
+  _MyApp() {
     final router = new Router();
     Routes.configureRoutes(router);
     // 这里设置项目环境
