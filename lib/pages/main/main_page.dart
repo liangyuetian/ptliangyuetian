@@ -95,16 +95,19 @@ class MainPage extends StatelessWidget {
                     onPressed: () {
                       gotoWeb(context);
                     }),
-                new CupertinoButton(
+                new Container(
+                  margin: EdgeInsets.all(10),
+                  child: new CupertinoButton(
 //                    minSize: 20, // 可以理解为最小宽度
-                    borderRadius: BorderRadius.all(Radius.circular(4.0)), // 圆角 默认8
-                    padding: EdgeInsets.all(10),
-                    disabledColor: Colors.greenAccent,
-                    color: Colors.red,
-                    child: new Text('图灵社区-拥有的书'),
-                    onPressed: () {
-                      gotoWebBook(context);
-                    }),
+                      borderRadius: BorderRadius.all(Radius.circular(4.0)), // 圆角 默认8
+                      padding: EdgeInsets.all(10),
+                      disabledColor: Colors.greenAccent,
+                      color: Colors.red,
+                      child: new Text('图灵社区-拥有的书'),
+                      onPressed: () {
+                        gotoWebBook(context);
+                      }),
+                ),
                 new Container(
                   margin: EdgeInsets.fromLTRB(20, 20, 0, 0),
                   child: CupertinoButton.filled(child: new Text('具有外边距的按钮'), onPressed: null),
@@ -127,7 +130,7 @@ class MainPage extends StatelessWidget {
   }
 
   gotoWebBook(context) {
-    String path = Uri.encodeComponent('https://www.ituring.com.cn/user/shelf');
+    String path = Uri.encodeComponent('https://m.ituring.com.cn/user/owe-book');
     String title = Uri.encodeComponent('拥有的书');
     Application.router
         .navigateTo(context, '${Routes.webViewPage}?title=$title&url=$path');

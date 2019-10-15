@@ -15,6 +15,7 @@ class WebViewPage extends StatefulWidget {
   final String title;
 
   WebViewPage(this.url, this.title);
+
   _WebViewPageState createState() => _WebViewPageState();
 }
 
@@ -57,7 +58,9 @@ class _WebViewPageState extends State<WebViewPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return new SafeArea(
+//      top: false,
+        child: Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
         title: Text(widget.title),
@@ -68,6 +71,6 @@ class _WebViewPageState extends State<WebViewPage> {
         withLocalStorage: true,
         withJavascript: true,
       ),
-    );
+    ));
   }
 }
