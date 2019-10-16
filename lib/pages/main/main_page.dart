@@ -15,7 +15,7 @@ class MainPage extends StatefulWidget {
   }
 }
 
-class _MainPage extends State {
+class _MainPage extends State with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
   final String bgUrl = 'assets/images/bAvqIeblkajqaqA.jpg';
   final String bgNetworkImage =
