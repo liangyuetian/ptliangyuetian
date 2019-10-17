@@ -34,19 +34,19 @@ class FavouriteModel extends ViewStateModel {
     setBusy();
     try {
       // article.collect 字段为null,代表是从我的收藏页面进入的 需要调用特殊的取消接口
-//      if (article.collect == null) {
-//        await WanAndroidRepository.unMyCollect(
-//            id: article.id, originId: article.originId);
-//        globalFavouriteModel.removeFavourite(article.originId);
-//      } else {
-//        if (article.collect) {
-//          await WanAndroidRepository.unCollect(article.id);
-//          globalFavouriteModel.removeFavourite(article.id);
-//        } else {
-//          await WanAndroidRepository.collect(article.id);
-//          globalFavouriteModel.addFavourite(article.id);
-//        }
-//      }
+      if (article.collect == null) {
+        await WanAndroidRepository.unMyCollect( // 取消收藏2
+            id: article.id, originId: article.originId);
+        globalFavouriteModel.removeFavourite(article.originId);
+      } else {
+        if (article.collect) {
+          await WanAndroidRepository.unCollect(article.id); // 取消收藏2
+          globalFavouriteModel.removeFavourite(article.id);
+        } else {
+          await WanAndroidRepository.collect(article.id); // 收藏2
+          globalFavouriteModel.addFavourite(article.id);
+        }
+      }
       article.collect = !(article.collect ?? true);
       setIdle();
     } catch (e, s) {

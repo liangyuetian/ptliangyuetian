@@ -1,5 +1,6 @@
 import 'package:ptliangyuetian/config/net/wan_android_api.dart';
 import 'package:ptliangyuetian/model/article.dart';
+
 //import 'package:fun_android/model/banner.dart';
 //import 'package:fun_android/model/coin_record.dart';
 //import 'package:fun_android/model/search.dart';
@@ -94,6 +95,7 @@ class WanAndroidRepository {
     });
     return User.fromJsonMap(response.data);
   }
+
 //
 //  /// 注册
 //  static Future register(
@@ -123,22 +125,23 @@ class WanAndroidRepository {
         .map<Article>((item) => Article.fromMap(item))
         .toList();
   }
+
 //
 //  // 收藏
-//  static collect(id) async {
-//    await http.post('lg/collect/$id/json');
-//  }
+  static collect(id) async {
+    await http.post('lg/collect/$id/json');
+  }
 //
 //  // 取消收藏
-//  static unCollect(id) async {
-//    await http.post('lg/uncollect_originId/$id/json');
-//  }
+  static unCollect(id) async {
+    await http.post('lg/uncollect_originId/$id/json');
+  }
 //
 //  // 取消收藏2
-//  static unMyCollect({id, originId}) async {
-//    await http.post('lg/uncollect/$id/json',
-//        queryParameters: {'originId': originId ?? -1});
-//  }
+  static unMyCollect({id, originId}) async {
+    await http.post('lg/uncollect/$id/json',
+        queryParameters: {'originId': originId ?? -1});
+  }
 //
 //  // 个人积分
 //  static Future fetchCoin() async {

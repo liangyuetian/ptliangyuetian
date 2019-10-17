@@ -5,12 +5,6 @@ import 'package:ptliangyuetian/view_model/locale_model.dart';
 import 'package:ptliangyuetian/view_model/theme_model.dart';
 import 'package:ptliangyuetian/view_model/user_model.dart';
 
-List<SingleChildCloneableWidget> providers = [
-  ...independentServices,
-  ...dependentServices,
-  ...uiConsumableProviders
-];
-
 /// 独立的model
 List<SingleChildCloneableWidget> independentServices = [
   ChangeNotifierProvider<ThemeModel>.value(value: ThemeModel()),
@@ -34,3 +28,15 @@ List<SingleChildCloneableWidget> uiConsumableProviders = [
 //    builder: (context) => Provider.of<AuthenticationService>(context, listen: false).user,
 //  )
 ];
+
+List<SingleChildCloneableWidget> providers = [
+  ...independentServices,
+  ...dependentServices,
+  ...uiConsumableProviders
+];
+
+class Providers {
+  static List<SingleChildCloneableWidget> generate() {
+    return [];
+  }
+}
