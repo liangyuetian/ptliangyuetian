@@ -17,7 +17,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPage extends State with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
-  final String bgUrl = 'assets/images/bAvqIeblkajqaqA.jpg';
+  final String bgUrl = 'assets/images/006i7H6Hgy1fjyd32bpqhj319c1w0kjm.jpg';
   final String bgNetworkImage =
       'http://i3.17173cdn.com/2fhnvk/YWxqaGBf/cms3/bAvqIeblkajqaqA.jpg';
   List<BottomNavigationBarItem> appBottomBar = [];
@@ -49,8 +49,8 @@ class _MainPage extends State with SingleTickerProviderStateMixin {
 //            end: Alignment.bottomCenter),
         color: Color.fromRGBO(54, 50, 50, 1),
         image: new DecorationImage(
-//          image: new AssetImage(bgUrl),
-            image: new NetworkImage(bgNetworkImage),
+          image: new AssetImage(bgUrl),
+//            image: new NetworkImage(bgNetworkImage),
             fit: BoxFit.cover
             //这里是从assets静态文件中获取的，也可以new NetworkImage(）从网络上获取
 //          centerSlice: new Rect.fromLTRB(270.0, 180.0, 1360.0, 730.0),
