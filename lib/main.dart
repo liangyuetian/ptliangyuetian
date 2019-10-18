@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluro/fluro.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +22,14 @@ main() async {
   WidgetsFlutterBinding.ensureInitialized(); // 绑定widget 框架和Flutter engine的桥梁
   await StorageManager.init();
   runApp(MyApp());
+//  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+//      statusBarColor: Colors.transparent,
+//      statusBarBrightness: Brightness.light));
+//  SystemChrome.setEnabledSystemUIOverlays([]); // 隐藏 状态栏和虚拟按键
+//  SystemChrome.setEnabledSystemUIOverlays(
+//      [SystemUiOverlay.top, SystemUiOverlay.bottom]
+//  ); // 恢复状态栏和虚拟键盘
+
 }
 
 class MyApp extends StatefulWidget {

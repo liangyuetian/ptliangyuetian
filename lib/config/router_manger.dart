@@ -5,6 +5,7 @@ import 'package:ptliangyuetian/widget/page_route_anim.dart';
 
 // 页面
 import 'package:ptliangyuetian/ui/splash.dart';
+import 'package:ptliangyuetian/ui/page/tab/tab_navigator.dart';
 
 class RouteName {
   static const String splash = 'splash';
@@ -19,6 +20,7 @@ class RoutesConfig {
   static generate<String, WidgetBuilder>() {
     return {
       RouteName.splash: (BuildContext context) => SplashPage(),
+      RouteName.tab: (BuildContext context) => TabNavigator(),
     };
   }
 }
