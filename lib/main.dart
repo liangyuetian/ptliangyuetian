@@ -6,6 +6,7 @@ import 'package:oktoast/oktoast.dart';
 import 'package:ptliangyuetian/config/provider_manager.dart' as prefix0;
 import 'package:ptliangyuetian/config/storage_manager.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:ptliangyuetian/config/router_manger.dart';
 
 import 'package:ptliangyuetian/config/provider_manager.dart';
 import 'package:ptliangyuetian/view_model/theme_model.dart';
@@ -17,6 +18,7 @@ import 'package:ptliangyuetian/router/application.dart';
 
 main() async {
   Provider.debugCheckInvalidValueType = null;
+  WidgetsFlutterBinding.ensureInitialized(); // 绑定widget 框架和Flutter engine的桥梁
   await StorageManager.init();
   runApp(MyApp());
 }
@@ -28,12 +30,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyApp extends State {
-  _MyApp() {
-    final router = new Router();
-    Routes.configureRoutes(router);
-    // 这里设置项目环境
-    Application.router = router;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,11 +42,15 @@ class _MyApp extends State {
                   hideFooterWhenNotFull: true, //列表数据不满一页,不触发加载更多
                   child: MaterialApp(
                     title: 'pt liangyuetian',
-//                    debugShowCheckedModeBanner: false,
+                    debugShowCheckedModeBanner: false, // 当为true时，在debug模式下显示右上角的debug字样的横幅，false即为不显示
+                    showSemanticsDebugger: false, // 显示布局边界
                     theme: themeModel.themeData(),
                     darkTheme: themeModel.themeData(platformDarkMode: true),
-                    locale: localeModel.locale,
-                    home: new MainPage(),
+                    locale: localeModel.locale, // 地点
+//                    home: new MainPage(),
+                    routes: RoutesConfig.generate(),
+                    onGenerateRoute: RouteGenerate.generateRoute, // 路由不存在时处理
+                    initialRoute: RouteName.splash, // 初始路由
                   ));
             })));
   }
