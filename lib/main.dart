@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluro/fluro.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -10,19 +9,18 @@ import 'package:ptliangyuetian/config/storage_manager.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:ptliangyuetian/config/router_manger.dart';
 
-import 'package:ptliangyuetian/config/provider_manager.dart';
+import 'package:ptliangyuetian/generated/i18n.dart';
 import 'package:ptliangyuetian/view_model/theme_model.dart';
 import 'package:ptliangyuetian/view_model/locale_model.dart';
-import 'package:ptliangyuetian/generated/i18n.dart';
-import 'package:ptliangyuetian/pages/main/main_page.dart';
-import 'package:ptliangyuetian/router/routers.dart';
-import 'package:ptliangyuetian/router/application.dart';
 
 main() async {
   Provider.debugCheckInvalidValueType = null;
   WidgetsFlutterBinding.ensureInitialized(); // 绑定widget 框架和Flutter engine的桥梁
   await StorageManager.init();
   runApp(MyApp());
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarBrightness: Brightness.light));
 //  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
 //      statusBarColor: Colors.transparent,
 //      statusBarBrightness: Brightness.light));
@@ -51,16 +49,15 @@ class _MyApp extends State {
               return RefreshConfiguration(
                   hideFooterWhenNotFull: true, //列表数据不满一页,不触发加载更多
                   child: MaterialApp(
-                    localeResolutionCallback: (deviceLocale, supportedLocales) {
-                      print('deviceLocale: $deviceLocale');
-                      print('deviceLocale: $supportedLocales');
-                    },
+//                    localeResolutionCallback: (deviceLocale, supportedLocales) {
+//                      print('deviceLocale: $deviceLocale $supportedLocales');
+//                    },
                     title: 'pt liangyuetian',
                     debugShowCheckedModeBanner: false, // 当为true时，在debug模式下显示右上角的debug字样的横幅，false即为不显示
                     showSemanticsDebugger: false, // 显示布局边界
                     theme: themeModel.themeData(),
                     darkTheme: themeModel.themeData(platformDarkMode: true),
-                    locale: localeModel.locale, // 地点
+                    locale: localeModel.locale ?? Locale('zh'), // 地点
                     localizationsDelegates: const [
                       S.delegate,
                       RefreshLocalizations.delegate, //下拉刷新
