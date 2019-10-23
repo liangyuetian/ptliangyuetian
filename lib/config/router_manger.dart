@@ -13,6 +13,7 @@ class RouteName {
   static const String login = 'login';
   static const String register = 'register';
   static const String setting = 'setting';
+  static const String articleDetail = 'articleDetail';
 }
 
 // 静态路由
