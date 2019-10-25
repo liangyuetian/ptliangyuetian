@@ -50,6 +50,7 @@ class FavouriteModel extends ViewStateModel {
       article.collect = !(article.collect ?? true);
       setIdle();
     } catch (e, s) {
+      debugPrint('view_state_refresh_list_model 错误');
       handleException(e, s);
     }
   }

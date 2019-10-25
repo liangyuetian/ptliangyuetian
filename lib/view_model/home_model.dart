@@ -17,10 +17,10 @@ class HomeModel extends ViewStateRefreshListModel {
   Future<List> loadData({int pageNum}) async {
     List<Future> futures = [];
     if (pageNum == ViewStateRefreshListModel.pageNumFirst) {
-//      futures.add(WanAndroidRepository.fetchBanners());
-//      futures.add(WanAndroidRepository.fetchTopArticles());
+      futures.add(WanAndroidRepository.fetchBanners());
+      futures.add(WanAndroidRepository.fetchTopArticles());
     }
-//    futures.add(WanAndroidRepository.fetchArticles(pageNum));
+    futures.add(WanAndroidRepository.fetchArticles(pageNum));
 
     var result = await Future.wait(futures);
     if (pageNum == ViewStateRefreshListModel.pageNumFirst) {

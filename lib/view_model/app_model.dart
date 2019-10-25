@@ -29,6 +29,7 @@ class AppUpdateModel extends ViewStateModel {
           await AppRepository.checkUpdate(Platform.operatingSystem, appVersion);
       setIdle();
     } catch (e,s) {
+      debugPrint('app_model 错误');
       setError(e,stackTrace: s);
     }
     return url;

@@ -1,37 +1,37 @@
 import 'package:ptliangyuetian/config/net/wan_android_api.dart';
 import 'package:ptliangyuetian/model/article.dart';
 
-//import 'package:fun_android/model/banner.dart';
-//import 'package:fun_android/model/coin_record.dart';
-//import 'package:fun_android/model/search.dart';
-//import 'package:fun_android/model/navigation_site.dart';
-//import 'package:fun_android/model/tree.dart';
+import 'package:ptliangyuetian/model/banner.dart';
+//import 'package:ptliangyuetian/model/coin_record.dart';
+//import 'package:ptliangyuetian/model/search.dart';
+//import 'package:ptliangyuetian/model/navigation_site.dart';
+//import 'package:ptliangyuetian/model/tree.dart';
 import 'package:ptliangyuetian/model/user.dart';
 
 class WanAndroidRepository {
 //  // 轮播
-//  static Future fetchBanners() async {
-//    var response = await http.get('banner/json');
-//    return response.data
-//        .map<Banner>((item) => Banner.fromJsonMap(item))
-//        .toList();
-//  }
+  static Future fetchBanners() async {
+    var response = await http.get('banner/json');
+    return response.data
+        .map<Banner>((item) => Banner.fromJsonMap(item))
+        .toList();
+  }
 //
 //  // 置顶文章
-//  static Future fetchTopArticles() async {
-//    var response = await http.get('article/top/json');
-//    return response.data.map<Article>((item) => Article.fromMap(item)).toList();
-//  }
+  static Future fetchTopArticles() async {
+    var response = await http.get('article/top/json');
+    return response.data.map<Article>((item) => Article.fromMap(item)).toList();
+  }
 //
 //  // 文章
-//  static Future fetchArticles(int pageNum, {int cid}) async {
-//    await Future.delayed(Duration(seconds: 1));
-//    var response = await http.get('article/list/$pageNum/json',
-//        queryParameters: (cid != null ? {'cid': cid} : null));
-//    return response.data['datas']
-//        .map<Article>((item) => Article.fromMap(item))
-//        .toList();
-//  }
+  static Future fetchArticles(int pageNum, {int cid}) async {
+    await Future.delayed(Duration(seconds: 1));
+    var response = await http.get('article/list/$pageNum/json',
+        queryParameters: (cid != null ? {'cid': cid} : null));
+    return response.data['datas']
+        .map<Article>((item) => Article.fromMap(item))
+        .toList();
+  }
 //
 //  // 项目分类
 //  static Future fetchTreeCategories() async {

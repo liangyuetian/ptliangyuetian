@@ -43,6 +43,7 @@ abstract class ViewStateRefreshListModel<T> extends ViewStateListModel<T> {
       }
       return data;
     } catch (e, s) {
+      debugPrint('view_state_refresh_list_model 错误');
       handleException(e, s);
       return null;
     }
